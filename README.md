@@ -37,34 +37,34 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Funktionen
 
--privater chat
--individuelle profile automatisch generiert basirend auf den gesammelten daten
--leute als freunde hinzufügen
--wochen/monat rückblick
--levelsystem um so aktiver und disziplinierter
+- privater chat
+- individuelle profile automatisch generiert basirend auf den gesammelten daten
+- leute als freunde hinzufügen
+- wochen/monat rückblick
+- levelsystem um so aktiver und disziplinierter
 
 ## Daten
 
--zähneputzen
--mahlzeiten
--aufstehen
--geburstag
--hobbys
+- zähneputzen
+- mahlzeiten
+- aufstehen
+- geburstag
+- hobbys
 -stadt wo man wohnt
--schuleform
--alter
--gewicht
--größe
--talente
--sport
--noten
--hausaufgaben/aktivität und ordenlichkeit
--lieblings fach/essen/tiere/trinken/farbe/spiel/song/film
--private information
--bildschrimzeit
--generelle freizeit aktivitäten
--stärken und schwächen
--geschlecht
--name
--ziele
--sprachen
+- schuleform
+- alter
+- gewicht
+- größe
+- talente
+- sport
+- noten
+- hausaufgaben/aktivität und ordenlichkeit
+- lieblings fach/essen/tiere/trinken/farbe/spiel/song/film
+- private information
+- bildschrimzeit
+- generelle freizeit aktivitäten
+- stärken und schwächen
+- geschlecht
+- name
+- ziele
+- sprachen
