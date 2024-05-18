@@ -2,7 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { Button, Container, Form, Nav, Navbar, NavDropdown, ProgressBar } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar, ProgressBar } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -14,8 +14,19 @@ export default function Overview() {
     const [maxXp, setMaxXp] = useState(20)
     const [xpPercent, setXpPercent] = useState(0)
 
+    const [vorname, setVorname] = useState("")
+    const [nachname, setNachname] = useState("")
+    const [zweitname, setZweitname] = useState("")
+
+    const [geburtsjahr, setGeburtsjahr] = useState("")
+    const [alter, setAlter] = useState("nicht angegeben")
+
+    const [größe, setGröße] = useState("")
+    const [gewicht, setGewicht] = useState("")
+
     useEffect(() => {
         calculateXp()
+        calculateAge()
     })
 
     const calculateXp = () => {
@@ -27,6 +38,19 @@ export default function Overview() {
         } else {
             setXpPercent((xp / maxXp) * 100)
         }
+    }
+
+    const calculateAge = () => {
+        if(!geburtsjahr){
+            return
+        }
+
+        const selectedDate = new Date(geburtsjahr);
+        const currentYear = new Date().getFullYear();
+        const selectedYear = selectedDate.getFullYear();
+        const calculatedAge = currentYear - selectedYear;
+        
+        setAlter(calculatedAge);
     }
 
     return (
@@ -71,26 +95,26 @@ export default function Overview() {
                                 <div>
                                     <div className="d-flex justify-content-between">
                                         <p className="ms-3">Vorname</p>
-                                        <Form.Control className="me-3 input-field"/>
+                                        <Form.Control className="me-3 input-field" value={vorname} onChange={(e) => setVorname(e.target.value)}/>
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <p className="ms-3">Nachname</p>
-                                        <Form.Control className="me-3 input-field"/>
+                                        <Form.Control className="me-3 input-field" value={nachname} onChange={(e) => setNachname(e.target.value)}/>
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <p className="ms-3">Zweitname</p>
-                                        <Form.Control className="me-3 input-field"/>
+                                        <Form.Control className="me-3 input-field" value={zweitname} onChange={(e) => setZweitname(e.target.value)}/>
                                     </div>
                                     <hr className="custom-hr" />
                                 </div>
                                 <div>
                                     <div className="d-flex justify-content-between">
                                         <p className="ms-3">Geburtsjahr</p>
-                                        <Form.Control className="me-3 input-field" type="date"/>
+                                        <Form.Control className="me-3 input-field" type="date" value={geburtsjahr} onChange={(e) => setGeburtsjahr(e.target.value)}/>
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <p className="ms-3">Alter</p>
-                                        <p className="me-3">16</p>
+                                        <p className="me-3">{alter}</p>
                                     </div>
                                     <hr className="custom-hr" />
                                 </div>
@@ -98,11 +122,11 @@ export default function Overview() {
                             <div className="col">
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Größe</p>
-                                    <Form.Control className="me-3 input-field"/>
+                                    <Form.Control className="me-3 input-field" value={größe} onChange={(e) => setGröße(e.target.value)}/>
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Gewicht</p>
-                                    <Form.Control className="me-3 input-field"/>
+                                    <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)}/>
                                 </div>
                                 <hr className="custom-hr" />
                             </div>
