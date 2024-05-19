@@ -19,3 +19,13 @@
     max-width: 200px;
     max-height: 25px;
 }
+
+.form-card{
+    margin-top: 150px;
+    width: 300px;
+}
+
+.form-input-field{
+    width: 100%;
+    margin-block: 10px;
+}

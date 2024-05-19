@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import Image from "next/image";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("")
@@ -35,35 +37,52 @@ export default function LoginForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Login</h1>
+            <Navbar fixed="top" expand="lg" className="bg-body-tertiary box-shadow">
+                <Container fluid className="d-flex justify-content-start">
+                    <Image src={"/icon/icon.JPG"} alt="icon" width={45} height={45} style={{ borderRadius: "50%" }} className="me-2" />
+                    <Navbar.Brand href="#">Open Journey</Navbar.Brand>
+                </Container>
+            </Navbar>
 
-                {error ? (
-                    <div>
-                        {error}
-                    </div>
-                ) : (
-                    <div>
-                        
-                    </div>
-                )}
 
-                <div>
-                    <div >
-                        <input type="email" placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)} />
-                    </div>
+            <div className="d-flex justify-content-center">
+                <div className="form-card bg-body-tertiary card-container">
+                    <div className="mx-3">
+                        <div className="d-flex justify-content-center mt-3">
+                            <h1>Login</h1>
+                        </div>
 
-                    <div>
-                        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <div className="d-flex justify-content-center text-danger">
+                            {error ? (
+                                <div>
+                                    {error}
+                                </div>
+                            ) : (
+                                <div style={{color:"transparent"}}>
+                                    hallo
+                                </div>
+                            )}
+                        </div>
+
+                        <div>
+                            <div>
+                                <Form.Control placeholder="E-Mail" className="form-input-field" onChange={e => setEmail(e.target.value)} />
+                            </div>
+
+                            <div>
+                                <Form.Control placeholder="Password" className="form-input-field" onChange={e => setPassword(e.target.value)} />
+                            </div>
+
+
+                            <Button className="form-input-field mt-3" variant="outline-primary" onClick={handleSubmit}>Login</Button>
+                        </div>
+
+                        <Link href="/signup" className="text-decoration-none" style={{fontSize:"18px", color:"black"}}>
+                            <p>Don't have an account? <br /><span className="text-decoration-underline text-primary"> Sign Up Here</span></p>
+                        </Link>
                     </div>
-                    <button>Login</button>
                 </div>
-
-
-                <Link href="/signup">
-                    <p>Don't have an account? Sign Up Here</p>
-                </Link>
-            </form>
+            </div>
         </div>
     )
 }

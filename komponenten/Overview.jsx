@@ -20,7 +20,7 @@ export default function Overview() {
     const [nachname, setNachname] = useState("")
     const [zweitname, setZweitname] = useState("")
 
-    const [geburtsjahr, setGeburtsjahr] = useState('2008-02-20');
+    const [geburtsjahr, setGeburtsjahr] = useState('');
     const [alter, setAlter] = useState("nicht angegeben")
 
     const [größe, setGröße] = useState("")

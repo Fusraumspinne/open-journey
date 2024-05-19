@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import Image from "next/image";
 
 export default function SignInForm() {
     const [name, setName] = useState("")
@@ -84,39 +86,55 @@ export default function SignInForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Sign Up</h1>
+            <Navbar fixed="top" expand="lg" className="bg-body-tertiary box-shadow">
+                <Container fluid className="d-flex justify-content-start">
+                    <Image src={"/icon/icon.JPG"} alt="icon" width={45} height={45} style={{ borderRadius: "50%" }} className="me-2" />
+                    <Navbar.Brand href="#">Open Journey</Navbar.Brand>
+                </Container>
+            </Navbar>
 
-                {error ? (
-                    <div>
-                        {error}
+
+            <div className="d-flex justify-content-center">
+                <div className="form-card bg-body-tertiary card-container">
+                    <div className="mx-3">
+                        <div className="d-flex justify-content-center mt-3">
+                            <h1>Sign Up</h1>
+                        </div>
+
+                        <div className="d-flex justify-content-center text-danger">
+                            {error ? (
+                                <div>
+                                    {error}
+                                </div>
+                            ) : (
+                                <div style={{color:"transparent"}}>
+                                    hallo
+                                </div>
+                            )}
+                        </div>
+
+                        <div>
+                            <div>
+                                <Form.Control placeholder="Username" className="form-input-field" onChange={e => setName(e.target.value)} />
+                            </div>
+                            <div>
+                                <Form.Control placeholder="E-Mail" className="form-input-field" onChange={e => setEmail(e.target.value)} />
+                            </div>
+
+                            <div>
+                                <Form.Control placeholder="Password" className="form-input-field" onChange={e => setPassword(e.target.value)} />
+                            </div>
+
+
+                            <Button className="form-input-field mt-3" variant="outline-primary" onClick={handleSubmit}>Sign Up</Button>
+                        </div>
+
+                        <Link href="/" className="text-decoration-none" style={{fontSize:"18px", color:"black"}}>
+                            <p>Already have an account? <span className="text-decoration-underline text-primary"> Login Here</span></p>
+                        </Link>
                     </div>
-                ) : (
-                    <div>
-
-                    </div>
-                )}
-
-                <div>
-                    <div>
-                        <input type="text" placeholder="Username" onChange={e => setName(e.target.value)} />
-                    </div>
-                    <div>
-                        <input type="email" placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)} />
-                    </div>
-
-                    <div>
-                        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-
-
-                    <button>Sign Up</button>
                 </div>
-
-                <Link href="/">
-                    <p>Already have an account? Login Here</p>
-                </Link>
-            </form>
+            </div>
         </div>
     )
 }
