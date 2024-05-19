@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Image from "next/image";
+import { EmailOutlined, LockOutlined, } from "@mui/icons-material";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("")
@@ -65,12 +66,14 @@ export default function LoginForm() {
                         </div>
 
                         <div>
-                            <div>
+                            <div className="d-flex justify-content-end">
                                 <Form.Control placeholder="E-Mail" className="form-input-field" onChange={e => setEmail(e.target.value)} />
+                                <EmailOutlined className="icon"/>
                             </div>
 
-                            <div>
+                            <div  className="d-flex justify-content-end">
                                 <Form.Control placeholder="Password" className="form-input-field" onChange={e => setPassword(e.target.value)} />
+                                <LockOutlined className="icon"/>
                             </div>
 
 
