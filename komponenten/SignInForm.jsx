@@ -10,6 +10,20 @@ export default function SignInForm() {
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
 
+    const [level, setLevel] = useState(1)
+    const [xp, setXp] = useState(0)
+    const [maxXp, setMaxXp] = useState(20)
+
+    const [vorname, setVorname] = useState("")
+    const [nachname, setNachname] = useState("")
+    const [zweitname, setZweitname] = useState("")
+
+    const [geburtsjahr, setGeburtsjahr] = useState("")
+    const [alter, setAlter] = useState("nicht angegeben")
+
+    const [größe, setGröße] = useState("")
+    const [gewicht, setGewicht] = useState("")
+
     const router = useRouter()
 
     const handleSubmit = async (e) => {
@@ -42,7 +56,17 @@ export default function SignInForm() {
                 body: JSON.stringify({
                     name,
                     email,
-                    password
+                    password,
+                    level,
+                    xp,
+                    maxXp,
+                    vorname,
+                    nachname,
+                    zweitname,
+                    geburtsjahr,
+                    alter,
+                    größe,
+                    gewicht
                 })
             })
 
@@ -69,7 +93,7 @@ export default function SignInForm() {
                     </div>
                 ) : (
                     <div>
-                        
+
                     </div>
                 )}
 
@@ -84,8 +108,8 @@ export default function SignInForm() {
                     <div>
                         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    
-                    
+
+
                     <button>Sign Up</button>
                 </div>
 

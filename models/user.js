@@ -13,6 +13,36 @@ const userSchema = new Schema(
         password: {
             type: String,
             required: true,
+        },
+        level: {
+            type: Number
+        },
+        xp: {
+            type: Number
+        },
+        maxXp: {
+            type: Number
+        },
+        vorname: {
+            type: String
+        },
+        nachname: {
+            type: String
+        },
+        zweitname: {
+            type: String
+        },
+        geburtsjahr: {
+            type: String
+        },
+        alter: {
+            type: String
+        },
+        größe: {
+            type: String
+        },
+        gewicht: {
+            type: String
         }
     },
     { timestamps: true }
