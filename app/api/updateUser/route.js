@@ -15,7 +15,15 @@ export async function PUT(req) {
             geburtsjahr,
             alter,
             größe,
-            gewicht
+            gewicht,
+            geschlecht,
+            lastUpdate,
+            zähneGeputztMorgens,
+            zähneGeputztMittags,
+            zähneGeputztAbends,
+            geduscht,
+            fingernägelGeschnitten,
+            fußnägelGeschnitten
         } = await req.json();
 
         await connectMongoDB();
@@ -36,6 +44,14 @@ export async function PUT(req) {
         user.alter = alter
         user.größe = größe
         user.gewicht = gewicht
+        user.geschlecht = geschlecht
+        user.lastUpdate = lastUpdate,
+        user.zähneGeputztMorgens = zähneGeputztMorgens,
+        user.zähneGeputztMittags = zähneGeputztMittags,
+        user.zähneGeputztAbends = zähneGeputztAbends,
+        user.geduscht = geduscht,
+        user.fingernägelGeschnitten = fingernägelGeschnitten,
+        user.fußnägelGeschnitten = fußnägelGeschnitten
 
         await user.save();
 

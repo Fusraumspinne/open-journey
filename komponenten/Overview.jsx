@@ -25,6 +25,18 @@ export default function Overview() {
 
     const [größe, setGröße] = useState("")
     const [gewicht, setGewicht] = useState("")
+    const [geschlecht, setGeschlecht] = useState("")
+
+    const [lastUpdate, setLastUpdate] = useState("")
+
+    const [zähneGeputztMorgens, setZähneGeputztMorgens] = useState(false)
+    const [zähneGeputztMittags, setZähneGeputztMittags] = useState(false)
+    const [zähneGeputztAbends, setZähneGeputztAbends] = useState(false)
+
+    const [geduscht, setGeduscht] = useState(false)
+
+    const [fingernägelGeschnitten, setFingernägelGeschnitten] = useState(false)
+    const [fußnägelGeschnitten, setFußnägelGeschnitten] = useState(false)
 
     const fetchUser = async (email) => {
         try {
@@ -45,15 +57,31 @@ export default function Overview() {
                 setXp(data.user.xp)
                 setMaxXp(data.user.maxXp)
 
-                setVorname(data.user.vorname);
-                setNachname(data.user.nachname);
-                setZweitname(data.user.zweitname);
+                setVorname(data.user.vorname)
+                setNachname(data.user.nachname)
+                setZweitname(data.user.zweitname)
 
-                setGeburtsjahr(data.user.geburtsjahr);
-                setAlter(data.user.alter);
+                setGeburtsjahr(data.user.geburtsjahr)
+                setAlter(data.user.alter)
 
-                setGröße(data.user.größe);
-                setGewicht(data.user.gewicht);
+                setGröße(data.user.größe)
+                setGewicht(data.user.gewicht)
+                setGeschlecht(data.user.geschlecht)
+
+                setLastUpdate(data.user.lastUpdate)
+                
+                setZähneGeputztMorgens(data.user.zähneGeputztMorgens)
+                setZähneGeputztMittags(data.user.zähneGeputztMittags)
+                setZähneGeputztAbends(data.zähneGeputztAbends)
+
+                setGeduscht(data.user.geduscht)
+                
+                setFingernägelGeschnitten(data.user.fingernägelGeschnitten)
+                setFußnägelGeschnitten(data.user.fußnägelGeschnitten)
+
+                handleDailyQuests()
+
+                console.log(data)
             } else {
                 console.error("Fehler beim Abrufen der Benutzer:", response.statusText);
             }
@@ -73,6 +101,8 @@ export default function Overview() {
 
         calculateXp()
         calculateAge()
+
+        handleDailyQuests()
     })
 
     const handleDateChange = (e) => {
@@ -122,8 +152,49 @@ export default function Overview() {
         }
     };
 
+    const handleDailyQuests = () => {
+        if(!lastUpdate){
+            return
+        }
+
+        const getCurrentDateInGermanFormat = () => {
+            const now = new Date();
+            return now.toLocaleDateString('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        };
+
+        const today = getCurrentDateInGermanFormat();
+
+        if (today === lastUpdate) {
+
+        } else {
+            setZähneGeputztMorgens(false)
+            setZähneGeputztMittags(false)
+            setZähneGeputztAbends(false)
+
+            setGeduscht(false)
+            setFingernägelGeschnitten(false)
+
+            setFußnägelGeschnitten(false)
+        }
+    };
+
     const handleUpdate = async (e) => {
         e.preventDefault();
+
+        const getCurrentDateInGermanFormat = () => {
+            const now = new Date();
+            return now.toLocaleDateString('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        };
+
+        setLastUpdate(getCurrentDateInGermanFormat());
 
         try {
             const response = await fetch("/api/updateUser", {
@@ -142,7 +213,15 @@ export default function Overview() {
                     geburtsjahr: geburtsjahr,
                     alter: alter,
                     größe: größe,
-                    gewicht: gewicht
+                    gewicht: gewicht,
+                    geschlecht: geschlecht,
+                    lastUpdate: getCurrentDateInGermanFormat(),
+                    zähneGeputztMorgens: zähneGeputztMorgens,
+                    zähneGeputztMittags: zähneGeputztMittags,
+                    zähneGeputztAbends: zähneGeputztAbends,
+                    geduscht: geduscht,
+                    fingernägelGeschnitten: fingernägelGeschnitten,
+                    fußnägelGeschnitten: fußnägelGeschnitten
                 }),
             });
 
@@ -247,15 +326,24 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(morgens)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztMorgens} onChange={(e) => {
+                                        handleXpDrop(e, 7)
+                                        setZähneGeputztMorgens(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(mittags)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 5)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztMittags} onChange={(e) => {
+                                        handleXpDrop(e, 5)
+                                        setZähneGeputztMittags(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(abends)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztAbends} onChange={(e) => {
+                                        handleXpDrop(e, 7)
+                                        setZähneGeputztAbends(e.target.checked)
+                                    }} />
                                 </div>
                                 <hr className="custom-hr" />
                             </div>
@@ -264,7 +352,10 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">geduscht</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 15)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={geduscht} onChange={(e) => {
+                                        handleXpDrop(e, 15)
+                                        setGeduscht(e.target.checked)
+                                    }} />
                                 </div>
                                 <hr className="custom-hr" />
                             </div>
@@ -273,11 +364,17 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Fingernägel geschnitten</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 20)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={fingernägelGeschnitten} onChange={(e) => {
+                                        handleXpDrop(e, 20)
+                                        setFingernägelGeschnitten(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Fußnägel geschnitten</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 25)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={fußnägelGeschnitten} onChange={(e) => {
+                                        handleXpDrop(e, 25)
+                                        setFußnägelGeschnitten(e.target.checked)
+                                    }} />
                                 </div>
                             </div>
                         </div>
@@ -367,6 +464,10 @@ export default function Overview() {
                                         <p className="mx-3">Gewicht</p>
                                         <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)} />
                                     </div>
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mx-3">Geschlecht</p>
+                                        <Form.Control className="me-3 input-field" value={geschlecht} onChange={(e) => setGeschlecht(e.target.value)} />
+                                    </div>
                                     <hr className="custom-hr" />
                                 </div>
                             </div>
@@ -382,15 +483,24 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(morgens)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztMorgens} onChange={(e) => {
+                                        handleXpDrop(e, 7)
+                                        setZähneGeputztMorgens(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(mittags)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 5)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztMittags} onChange={(e) => {
+                                        handleXpDrop(e, 5)
+                                        setZähneGeputztMittags(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Zähne geputzt(abends)</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={zähneGeputztAbends} onChange={(e) => {
+                                        handleXpDrop(e, 7)
+                                        setZähneGeputztAbends(e.target.checked)
+                                    }} />
                                 </div>
                                 <hr className="custom-hr" />
                             </div>
@@ -399,7 +509,10 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">geduscht</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 15)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={geduscht} onChange={(e) => {
+                                        handleXpDrop(e, 15)
+                                        setGeduscht(e.target.checked)
+                                    }} />
                                 </div>
                                 <hr className="custom-hr" />
                             </div>
@@ -408,11 +521,17 @@ export default function Overview() {
 
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Fingernägel geschnitten</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 20)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={fingernägelGeschnitten} onChange={(e) => {
+                                        handleXpDrop(e, 20)
+                                        setFingernägelGeschnitten(e.target.checked)
+                                    }} />
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="ms-3">Fußnägel geschnitten</p>
-                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 25)} />
+                                    <Form.Check type={"checkbox"} className="me-3" checked={fußnägelGeschnitten} onChange={(e) => {
+                                        handleXpDrop(e, 25)
+                                        setFußnägelGeschnitten(e.target.checked)
+                                    }} />
                                 </div>
                             </div>
                         </div>

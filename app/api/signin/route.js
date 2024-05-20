@@ -18,7 +18,15 @@ export async function POST(req) {
             geburtsjahr,
             alter,
             größe,
-            gewicht
+            gewicht,
+            geschlecht,
+            lastUpdate,
+            zähneGeputztMorgens,
+            zähneGeputztMittags,
+            zähneGeputztAbends,
+            geduscht,
+            fingernägelGeschnitten,
+            fußnägelGeschnitten
         } = await req.json()
         const hashedPassword = await bcrypt.hash(password, 10)
         await connectMongoDB()
@@ -35,7 +43,15 @@ export async function POST(req) {
             geburtsjahr,
             alter,
             größe,
-            gewicht
+            gewicht,
+            geschlecht,
+            lastUpdate,
+            zähneGeputztMorgens,
+            zähneGeputztMittags,
+            zähneGeputztAbends,
+            geduscht,
+            fingernägelGeschnitten,
+            fußnägelGeschnitten
         })
 
         return NextResponse.json({ message: "User registered." }, { status: 201 });

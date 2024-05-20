@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Image from "next/image";
@@ -26,6 +26,18 @@ export default function SignInForm() {
 
     const [größe, setGröße] = useState("")
     const [gewicht, setGewicht] = useState("")
+    const [geschlecht, setGeschlecht] = useState("")
+
+    const [lastUpdate, setLastUpdate] = useState("")
+
+    const [zähneGeputztMorgens, setZähneGeputztMorgens] = useState(false)
+    const [zähneGeputztMittags, setZähneGeputztMittags] = useState(false)
+    const [zähneGeputztAbends, setZähneGeputztAbends] = useState(false)
+
+    const [geduscht, setGeduscht] = useState(false)
+
+    const [fingernägelGeschnitten, setFingernägelGeschnitten] = useState(false)
+    const [fußnägelGeschnitten, setFußnägelGeschnitten] = useState(false)
 
     const router = useRouter()
 
@@ -69,7 +81,15 @@ export default function SignInForm() {
                     geburtsjahr,
                     alter,
                     größe,
-                    gewicht
+                    gewicht,
+                    geschlecht,
+                    lastUpdate,
+                    zähneGeputztMorgens,
+                    zähneGeputztMittags,
+                    zähneGeputztAbends,
+                    geduscht,
+                    fingernägelGeschnitten,
+                    fußnägelGeschnitten
                 })
             })
 
@@ -108,7 +128,7 @@ export default function SignInForm() {
                                     {error}
                                 </div>
                             ) : (
-                                <div style={{color:"transparent"}}>
+                                <div style={{ color: "transparent" }}>
                                     hallo
                                 </div>
                             )}
@@ -117,23 +137,23 @@ export default function SignInForm() {
                         <div>
                             <div className="d-flex justify-content-end">
                                 <Form.Control placeholder="Username" className="form-input-field" onChange={e => setName(e.target.value)} />
-                                <PersonOutline className="icon"/>
+                                <PersonOutline className="icon" />
                             </div>
                             <div className="d-flex justify-content-end">
                                 <Form.Control placeholder="E-Mail" className="form-input-field" onChange={e => setEmail(e.target.value)} />
-                                <EmailOutlined className="icon"/>
+                                <EmailOutlined className="icon" />
                             </div>
 
                             <div className="d-flex justify-content-end">
                                 <Form.Control placeholder="Password" className="form-input-field" onChange={e => setPassword(e.target.value)} />
-                                <LockOutlined className="icon"/>
+                                <LockOutlined className="icon" />
                             </div>
 
 
                             <Button className="form-input-field mt-3" variant="outline-primary" onClick={handleSubmit}>Sign Up</Button>
                         </div>
 
-                        <Link href="/" className="text-decoration-none" style={{fontSize:"18px", color:"black"}}>
+                        <Link href="/" className="text-decoration-none" style={{ fontSize: "18px", color: "black" }}>
                             <p>Already have an account? <span className="text-decoration-underline text-primary"> Login Here</span></p>
                         </Link>
                     </div>

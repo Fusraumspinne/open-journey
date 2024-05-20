@@ -43,6 +43,30 @@ const userSchema = new Schema(
         },
         gewicht: {
             type: String
+        },
+        geschlecht: {
+            type: String
+        },
+        lastUpdate: {
+            type: String
+        },
+        zähneGeputztMorgens: {
+            type: Boolean
+        },
+        zähneGeputztMittags: {
+            type: Boolean
+        },
+        zähneGeputztAbends: {
+            type: Boolean
+        },
+        geduscht: {
+            type: Boolean
+        },
+        fingernägelGeschnitten: {
+            type: Boolean
+        },
+        fußnägelGeschnitten: {
+            type: Boolean
         }
     },
     { timestamps: true }
