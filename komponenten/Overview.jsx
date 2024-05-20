@@ -189,7 +189,7 @@ export default function Overview() {
                     </Container>
                 </Navbar>
 
-                <div style={{ marginBlock: "110px", marginInline: "50px" }}>
+                <div style={{ marginBlock: "110px", marginInline: "15px" }}>
                     <div className="my-5">
                         <div className="bg-body-tertiary box-shadow card-container">
                             <h1 className="ms-3 pt-2 fs-3">Persöhnliche Daten</h1>
