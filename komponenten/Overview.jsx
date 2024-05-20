@@ -72,7 +72,7 @@ export default function Overview() {
                 
                 setZähneGeputztMorgens(data.user.zähneGeputztMorgens)
                 setZähneGeputztMittags(data.user.zähneGeputztMittags)
-                setZähneGeputztAbends(data.zähneGeputztAbends)
+                setZähneGeputztAbends(data.user.zähneGeputztAbends)
 
                 setGeduscht(data.user.geduscht)
                 
