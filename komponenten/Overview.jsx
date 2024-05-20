@@ -81,7 +81,7 @@ export default function Overview() {
     }
 
     const calculateXp = () => {
-        if(xp >= 0){
+        if (xp >= 0) {
             if (xp >= maxXp) {
                 setLevel(level + 1)
                 setXp(xp - maxXp)
@@ -116,9 +116,9 @@ export default function Overview() {
 
     const handleXpDrop = (e, xpDrop) => {
         if (e.target.checked) {
-          setXp(prevXp => prevXp + xpDrop);
+            setXp(prevXp => prevXp + xpDrop);
         } else {
-          setXp(prevXp => prevXp - xpDrop);
+            setXp(prevXp => prevXp - xpDrop);
         }
     };
 
@@ -158,136 +158,273 @@ export default function Overview() {
 
     return (
         <div>
-            <Navbar fixed="top" expand="lg" className="bg-body-tertiary box-shadow">
-                <Container fluid>
-                    <Image src={"/icon/icon.JPG"} alt="icon" width={45} height={45} style={{ borderRadius: "50%" }} className="me-2" />
-                    <Navbar.Brand href="#">Open Journey</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="/">Angemeldet als: {session?.user?.name}</Nav.Link>
-                            <Nav.Link href="/">Freunde</Nav.Link>
-                        </Nav>
-                        <div className="d-flex">
-                            <Button variant="outline-primary me-2" onClick={handleUpdate}>Upload</Button>
-                            <Form.Control
-                                type="search"
-                                placeholder="Username"
-                                className="me-2"
-                                aria-label="Search"
-                                bg="success"
-                            />
-                            <Button variant="outline-primary" style={{ borderRadius: "6px 0 0 6px" }}>Search</Button>
-                            <Button variant="outline-primary" style={{ borderRadius: "0 6px 6px 0" }} onClick={() => signOut()}>Logout</Button>
-                        </div>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <div className="small-screen">
+                <Navbar fixed="top" expand="lg" className="bg-body-tertiary box-shadow">
+                    <Container fluid>
+                        <Image src={"/icon/icon.JPG"} alt="icon" width={45} height={45} style={{ borderRadius: "50%" }} className="me-3" />
+                        <Navbar.Brand href="#">Open Journey</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="navbarScroll" />
+                        <Navbar.Collapse id="navbarScroll">
+                            <Nav
+                                className="me-auto my-2 my-lg-0"
+                                style={{ maxHeight: '100px' }}
+                                navbarScroll
+                            >
+                                <Nav.Link href="/">Freunde</Nav.Link>
+                                <Nav.Link href="/">Leaderbord</Nav.Link>
+                            </Nav>
+                            <Button variant="outline-primary me-2 form-input-field" onClick={handleUpdate}>Upload</Button>
+                            <div className="d-flex">
+                                <Form.Control
+                                    type="search"
+                                    placeholder="Username"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    bg="success"
+                                />
+                                <Button variant="outline-primary">Search</Button>
+                            </div>
+                            <Button variant="outline-primary form-input-field" onClick={() => signOut()}>Logout</Button>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
 
-            <div style={{ marginBlock: "110px", marginInline: "50px" }} className="d-flex justify-content-center row">
-                <div className="col-8">
-                    <div className="bg-body-tertiary box-shadow card-container">
-                        <h1 className="ms-3 pt-2 fs-3">Persöhnliche Daten</h1>
+                <div style={{ marginBlock: "110px", marginInline: "50px" }}>
+                    <div className="my-5">
+                        <div className="bg-body-tertiary box-shadow card-container">
+                            <h1 className="ms-3 pt-2 fs-3">Persöhnliche Daten</h1>
 
-                        <div className="row">
-                            <div className="col">
-                                <div>
-                                    <div className="d-flex justify-content-between">
-                                        <p className="ms-3">Vorname</p>
-                                        <Form.Control className="me-3 input-field" value={vorname} onChange={(e) => setVorname(e.target.value)} />
+                            <div className="row">
+                                <div className="col">
+                                    <div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Vorname</p>
+                                            <Form.Control className="me-3 input-field" value={vorname} onChange={(e) => setVorname(e.target.value)} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Nachname</p>
+                                            <Form.Control className="me-3 input-field" value={nachname} onChange={(e) => setNachname(e.target.value)} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Zweitname</p>
+                                            <Form.Control className="me-3 input-field" value={zweitname} onChange={(e) => setZweitname(e.target.value)} />
+                                        </div>
+                                        <hr className="custom-hr" />
                                     </div>
-                                    <div className="d-flex justify-content-between">
-                                        <p className="ms-3">Nachname</p>
-                                        <Form.Control className="me-3 input-field" value={nachname} onChange={(e) => setNachname(e.target.value)} />
+                                    <div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Geburtsjahr</p>
+                                            <Form.Control className="me-3 input-field" type="date" value={geburtsjahr} onChange={handleDateChange} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Alter</p>
+                                            <p className="me-3">{alter}</p>
+                                        </div>
+                                        <hr className="custom-hr" />
                                     </div>
-                                    <div className="d-flex justify-content-between">
-                                        <p className="ms-3">Zweitname</p>
-                                        <Form.Control className="me-3 input-field" value={zweitname} onChange={(e) => setZweitname(e.target.value)} />
-                                    </div>
-                                    <hr className="custom-hr" />
                                 </div>
-                                <div>
+                                <div className="col">
                                     <div className="d-flex justify-content-between">
-                                        <p className="ms-3">Geburtsjahr</p>
-                                        <Form.Control className="me-3 input-field" type="date" value={geburtsjahr} onChange={handleDateChange} />
+                                        <p className="mx-3">Größe</p>
+                                        <Form.Control className="me-3 input-field" value={größe} onChange={(e) => setGröße(e.target.value)} />
                                     </div>
                                     <div className="d-flex justify-content-between">
-                                        <p className="ms-3">Alter</p>
-                                        <p className="me-3">{alter}</p>
+                                        <p className="mx-3">Gewicht</p>
+                                        <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)} />
                                     </div>
                                     <hr className="custom-hr" />
                                 </div>
                             </div>
-                            <div className="col">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="bg-body-tertiary box-shadow card-container">
+                            <h1 className="ms-3 pt-2 fs-3">Hygiene</h1>
+
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">Zähne geputzt</p>
+
                                 <div className="d-flex justify-content-between">
-                                    <p className="ms-3">Größe</p>
-                                    <Form.Control className="me-3 input-field" value={größe} onChange={(e) => setGröße(e.target.value)} />
+                                    <p className="ms-3">Zähne geputzt(morgens)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
                                 </div>
                                 <div className="d-flex justify-content-between">
-                                    <p className="ms-3">Gewicht</p>
-                                    <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)} />
+                                    <p className="ms-3">Zähne geputzt(mittags)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 5)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Zähne geputzt(abends)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
                                 </div>
                                 <hr className="custom-hr" />
+                            </div>
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">gewaschen</p>
+
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">geduscht</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 15)} />
+                                </div>
+                                <hr className="custom-hr" />
+                            </div>
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">Nägel geschnitten</p>
+
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Fingernägel geschnitten</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 20)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Fußnägel geschnitten</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 25)} />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="col-4">
-                    <div className="bg-body-tertiary box-shadow card-container">
-                        <h1 className="ms-3 pt-2 fs-3">Hygiene</h1>
-
-                        <div>
-                            <p className="ms-3 fs-5 fw-semibold">Zähne geputzt</p>
-
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">Zähne geputzt(morgens)</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)}/>
-                            </div>
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">Zähne geputzt(mittags)</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 5)}/>
-                            </div>
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">Zähne geputzt(abends)</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)}/>
-                            </div>
-                            <hr className="custom-hr" />
-                        </div>
-                        <div>
-                            <p className="ms-3 fs-5 fw-semibold">gewaschen</p>
-
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">geduscht</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 15)}/>
-                            </div>
-                            <hr className="custom-hr" />
-                        </div>
-                        <div>
-                            <p className="ms-3 fs-5 fw-semibold">Nägel geschnitten</p>
-
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">Fingernägel geschnitten</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 20)}/>
-                            </div>
-                            <div className="d-flex justify-content-between">
-                                <p className="ms-3">Fußnägel geschnitten</p>
-                                <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 25)}/>
-                            </div>
-                        </div>
+                <div className="fixed-bottom bg-body-tertiary box-shadow">
+                    <div className="mx-3 my-2">
+                        <div>Level: {level}</div>
+                        <div>XP: {xp}/{maxXp}</div>
+                        <ProgressBar now={xpPercent} />
                     </div>
                 </div>
             </div>
 
-            <div className="fixed-bottom bg-body-tertiary box-shadow">
-                <div className="mx-3 my-2">
-                    <div>Level: {level}</div>
-                    <div>XP: {xp}/{maxXp}</div>
-                    <ProgressBar now={xpPercent} />
+            <div className="big-screen">
+                <Navbar fixed="top" expand="lg" className="bg-body-tertiary box-shadow">
+                    <Container fluid>
+                        <Image src={"/icon/icon.JPG"} alt="icon" width={45} height={45} style={{ borderRadius: "50%" }} className="me-2" />
+                        <Navbar.Brand href="#">Open Journey</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="navbarScroll" />
+                        <Navbar.Collapse id="navbarScroll">
+                            <Nav
+                                className="me-auto my-2 my-lg-0"
+                                style={{ maxHeight: '100px' }}
+                                navbarScroll
+                            >
+                                <Nav.Link href="/">Freunde</Nav.Link>
+                                <Nav.Link href="/">Leaderbord</Nav.Link>
+                            </Nav>
+                            <div className="d-flex">
+                                <Button variant="outline-primary me-2" onClick={handleUpdate}>Upload</Button>
+                                <Form.Control
+                                    type="search"
+                                    placeholder="Username"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    bg="success"
+                                />
+                                <Button variant="outline-primary" style={{ borderRadius: "6px 0 0 6px" }}>Search</Button>
+                                <Button variant="outline-primary" style={{ borderRadius: "0 6px 6px 0" }} onClick={() => signOut()}>Logout</Button>
+                            </div>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+
+                <div style={{ marginBlock: "110px", marginInline: "50px" }} className="d-flex justify-content-center row">
+                    <div className="col-8">
+                        <div className="bg-body-tertiary box-shadow card-container">
+                            <h1 className="ms-3 pt-2 fs-3">Persöhnliche Daten</h1>
+
+                            <div className="row">
+                                <div className="col">
+                                    <div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Vorname</p>
+                                            <Form.Control className="me-3 input-field" value={vorname} onChange={(e) => setVorname(e.target.value)} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Nachname</p>
+                                            <Form.Control className="me-3 input-field" value={nachname} onChange={(e) => setNachname(e.target.value)} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Zweitname</p>
+                                            <Form.Control className="me-3 input-field" value={zweitname} onChange={(e) => setZweitname(e.target.value)} />
+                                        </div>
+                                        <hr className="custom-hr" />
+                                    </div>
+                                    <div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Geburtsjahr</p>
+                                            <Form.Control className="me-3 input-field" type="date" value={geburtsjahr} onChange={handleDateChange} />
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mx-3">Alter</p>
+                                            <p className="me-3">{alter}</p>
+                                        </div>
+                                        <hr className="custom-hr" />
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mx-3">Größe</p>
+                                        <Form.Control className="me-3 input-field" value={größe} onChange={(e) => setGröße(e.target.value)} />
+                                    </div>
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mx-3">Gewicht</p>
+                                        <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)} />
+                                    </div>
+                                    <hr className="custom-hr" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-4">
+                        <div className="bg-body-tertiary box-shadow card-container">
+                            <h1 className="ms-3 pt-2 fs-3">Hygiene</h1>
+
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">Zähne geputzt</p>
+
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Zähne geputzt(morgens)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Zähne geputzt(mittags)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 5)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Zähne geputzt(abends)</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 7)} />
+                                </div>
+                                <hr className="custom-hr" />
+                            </div>
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">gewaschen</p>
+
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">geduscht</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 15)} />
+                                </div>
+                                <hr className="custom-hr" />
+                            </div>
+                            <div>
+                                <p className="ms-3 fs-5 fw-semibold">Nägel geschnitten</p>
+
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Fingernägel geschnitten</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 20)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p className="ms-3">Fußnägel geschnitten</p>
+                                    <Form.Check type={"checkbox"} className="me-3" onChange={(e) => handleXpDrop(e, 25)} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="fixed-bottom bg-body-tertiary box-shadow">
+                    <div className="mx-3 my-2">
+                        <div>Level: {level}</div>
+                        <div>XP: {xp}/{maxXp}</div>
+                        <ProgressBar now={xpPercent} />
+                    </div>
                 </div>
             </div>
         </div>
