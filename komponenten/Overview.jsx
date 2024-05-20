@@ -311,6 +311,10 @@ export default function Overview() {
                                         <p className="mx-3">Gewicht</p>
                                         <Form.Control className="me-3 input-field" value={gewicht} onChange={(e) => setGewicht(e.target.value)} />
                                     </div>
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mx-3">Geschlecht</p>
+                                        <Form.Control className="me-3 input-field" value={geschlecht} onChange={(e) => setGeschlecht(e.target.value)} />
+                                    </div>
                                     <hr className="custom-hr" />
                                 </div>
                             </div>
