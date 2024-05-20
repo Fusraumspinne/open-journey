@@ -96,7 +96,7 @@ export default function SignInForm() {
 
 
             <div className="d-flex justify-content-center">
-                <div className="form-card bg-body-tertiary card-container">
+                <div className="bg-body-tertiary box-shadow card-container form-card">
                     <div className="mx-3">
                         <div className="d-flex justify-content-center mt-3">
                             <h1>Sign Up</h1>
