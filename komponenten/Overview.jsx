@@ -171,6 +171,18 @@ export default function Overview() {
         if (today === lastUpdate) {
 
         } else {
+            const getCurrentDateInGermanFormat = () => {
+                const now = new Date();
+                return now.toLocaleDateString('de-DE', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+            };
+    
+            const today = getCurrentDateInGermanFormat();
+            setLastUpdate(today)
+
             setZähneGeputztMorgens(false)
             setZähneGeputztMittags(false)
             setZähneGeputztAbends(false)
