@@ -42,6 +42,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - leute als freunde hinzufügen
 - wochen/monat rückblick
 - levelsystem um so aktiver und disziplinierter
+- nationalität angeben (wenn frankreich dann gebannt)
 
 ## Daten
 
